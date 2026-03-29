@@ -7,9 +7,9 @@ def create_gui():
     cv2.namedWindow("Controls")
 
     cv2.createTrackbar("LH","Controls",0,179,nothing)
-    cv2.createTrackbar("LS","Controls",0,255,nothing)
-    cv2.createTrackbar("LV","Controls",0,255,nothing)
-    cv2.createTrackbar("UH","Controls",179,179,nothing)
+    cv2.createTrackbar("LS","Controls",120,255,nothing)
+    cv2.createTrackbar("LV","Controls",70,255,nothing)
+    cv2.createTrackbar("UH","Controls",10,179,nothing)
     cv2.createTrackbar("US","Controls",255,255,nothing)
     cv2.createTrackbar("UV","Controls",255,255,nothing)
 

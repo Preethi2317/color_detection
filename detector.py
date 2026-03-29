@@ -12,17 +12,24 @@ def detect_colors(frame, hsv, colors):
         mask = cv2.inRange(hsv, lower, upper)
         mask = preprocess_mask(mask)
 
-        contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-        for cnt in contours:
+        if len(contours) > 0:
+            cnt = max(contours, key=cv2.contourArea)
+
             area = cv2.contourArea(cnt)
 
-            if area > 700:
+            if area > 2000:
+                # Smooth bounding box
                 x,y,w,h = cv2.boundingRect(cnt)
+
+                cx = int(x + w/2)
+                cy = int(y + h/2)
 
                 detections.append({
                     "name": name,
                     "box": (x,y,w,h),
+                    "center": (cx, cy),
                     "color": color,
                     "area": area
                 })
